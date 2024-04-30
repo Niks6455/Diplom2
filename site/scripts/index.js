@@ -86,3 +86,82 @@ document.querySelectorAll('.jscorLink').forEach(anchor => {
       }
     });
   });
+
+  //!PopUp
+  const request_btns = document.querySelectorAll(".request_btn");
+  const PopUp = document.querySelector(".PopUp");
+  const close_Pop_button = document.querySelector(".close_Pop_button");
+  request_btns.forEach(request_btn => {
+    request_btn.addEventListener("click", () => {
+      PopUp.classList.add("active");
+    });
+  });
+  
+  close_Pop_button.addEventListener("click", () => {
+    PopUp.classList.remove("active")
+  })
+
+  //!Форма
+
+const form = document.querySelector('form');
+const submitBtn = document.querySelector('button[type="submit"]');
+
+submitBtn.addEventListener('click', (event) => {
+  event.preventDefault();
+
+  const fullName = form.querySelector('input[name="ФИО"]').value;
+  const phoneNumber = form.querySelector('input[name="number"]').value;
+  const email = form.querySelector('input[name="Email"]').value;
+
+    //валидации формы
+    if (fullName.trim() === '' || phoneNumber.trim() === '' || email.trim() === '') {
+        alert('Пожалуйста, заполните все поля формы.');
+        return; 
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^\+?\d{10,14}$/;
+    if (!emailRegex.test(email)) {
+        alert('Пожалуйста, введите корректный адрес электронной почты.');
+        return;
+    }
+    if (!phoneRegex.test(phoneNumber)) {
+        alert('Пожалуйста, введите корректный номер телефона.');
+        return; 
+    }
+
+  //отправка формы
+  const formDatadata = {
+    name: fullName,
+    email: email,
+    phone: phoneNumber
+  }
+  
+
+
+   fetch('./submitForm.php', { //! вместо ./submitForm.php вставить полный адрес к скрипту на сервере !
+    method: 'POST',
+    body: formDatadata
+  })
+  .then(response => {
+    if (response.ok) {
+      // Письмо успешно отправлено
+      alert('Письмо успешно отправлено! В течении нескольких рабочих дней с вами свяжутся.');
+      form.reset(); 
+      PopUp.classList.remove("active")
+    } else {
+      alert('Ошибка при отправке письма.');
+    }
+  })
+});
+
+
+//!бургер меню 
+
+const burger_nav = document.querySelector(".burger_nav");
+const burger = document.querySelector(".burger");
+const list__header = document.querySelector(".list_boorger_header");
+burger_nav.addEventListener("click", () =>{
+    list__header.classList.contains("active") ? list__header.classList.remove("active") : list__header.classList.add("active")
+    burger.classList.contains("active") ? burger.classList.remove("active") : burger.classList.add("active")
+
+})
