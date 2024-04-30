@@ -65,6 +65,22 @@ document.querySelectorAll('.jscorLink').forEach(anchor => {
       e.preventDefault();
       const href = this.getAttribute('href');
       const targetElement = document.querySelector(href);
+      if ((window.innerWidth < 930) && (href == "#room")){
+        console.log("z otrabotal")
+        const offset = 1200;
+        window.scrollTo({
+            top: offset,
+            behavior: 'smooth'
+          });
+      }
+      if ((window.innerWidth > 930) && (href == "#room")){
+        console.log("z otrabotal")
+        const offset = 900;
+        window.scrollTo({
+            top: offset,
+            behavior: 'smooth'
+          });
+      }
       if(href == "#top"){
         window.scrollTo({
             top: 0,
@@ -136,8 +152,6 @@ submitBtn.addEventListener('click', (event) => {
     phone: phoneNumber
   }
   
-
-
    fetch('./submitForm.php', { //! вместо ./submitForm.php вставить полный адрес к скрипту на сервере !
     method: 'POST',
     body: formDatadata
@@ -156,7 +170,6 @@ submitBtn.addEventListener('click', (event) => {
 
 
 //!бургер меню 
-
 const burger_nav = document.querySelector(".burger_nav");
 const burger = document.querySelector(".burger");
 const list__header = document.querySelector(".list_boorger_header");
