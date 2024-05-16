@@ -151,21 +151,22 @@ submitBtn.addEventListener('click', (event) => {
     email: email,
     phone: phoneNumber
   }
-  
-   fetch('./submitForm.php', { //! вместо ./submitForm.php вставить полный адрес к скрипту на сервере !
-    method: 'POST',
-    body: formDatadata
-  })
-  .then(response => {
-    if (response.ok) {
-      // Письмо успешно отправлено
-      alert('Письмо успешно отправлено! В течении нескольких рабочих дней с вами свяжутся.');
-      form.reset(); 
-      PopUp.classList.remove("active")
-    } else {
-      alert('Ошибка при отправке письма.');
-    }
-  })
+  console.log(formDatadata)
+  // const JsonData = JSON(formDatadata)
+  //  fetch('./submitForm.php', { //! вместо ./submitForm.php вставить полный адрес к скрипту на сервере !
+  //   method: 'POST',
+  //   body: JsonData
+  // })
+  // .then(response => {
+  //   if (response.ok) {
+  //     // Письмо успешно отправлено
+  //     alert('Письмо успешно отправлено! В течении нескольких рабочих дней с вами свяжутся.');
+  //     form.reset(); 
+  //     PopUp.classList.remove("active")
+  //   } else {
+  //     alert('Ошибка при отправке письма.');
+  //   }
+  // })
 });
 
 
